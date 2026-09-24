@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CeLox - Premium Virtual Cards</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0b0b;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 50px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 15px;
+        }
+
+        /* Navbar */
+        .navbar {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #121212;
+            border-bottom: 1px solid #222;
+        }
+
+        /* Golden Shining Logo Animation */
+        .logo {
+            font-weight: 800;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(90deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, #d4af37, #aa771c);
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 50%;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-links a {
+            color: #888;
+            text-decoration: none;
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .nav-links a.active {
+            background: #c00000;
+            color: #fff;
+        }
+
+        .profile-icon {
+            background: linear-gradient(135deg, #ff5500, #ff2200);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(255, 85, 0, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .lightning-icon {
+            font-size: 30px;
+            color: #ffcc00;
+        }
+
+        .hero h1 {
+            font-size: 22px;
+            margin: 10px 0;
+        }
+
+        .hero h1 span {
+            color: #ff4500;
+        }
+
+        .hero p {
+            color: #777;
+            font-size: 12px;
+        }
+
+        /* Quick Select Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .card-item {
+            background: #161616;
+            border: 1px solid #282828;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        .card-price {
+            font-size: 14px;
+            font-weight: bold;
+            color: #d4af37;
+            margin-top: 5px;
+        }
+
+        /* Plan Banner */
+        .plan-banner {
+            background: #141414;
+            border: 1px solid #2a2a2a;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .diamond-icon {
+            font-size: 30px;
+        }
+
+        .plan-banner h2 {
+            color: #ffcc00;
+            font-size: 18px;
+            margin: 5px 0;
+        }
+
+        .plan-banner p {
+            color: #888;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .banner-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: #cc0000;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #e60000;
+        }
+
+        .badge {
+            background: #0f2d18;
+            color: #2ed573;
+            font-size: 11px;
+            padding: 6px;
+            border-radius: 15px;
+            border: 1px solid #1e532d;
+        }
+
+        /* Live Section */
+        .live-section {
+            background: #121212;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .live-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+
+        .status-badge {
+            color: #2ed573;
+        }
+
+        .live-count {
+            color: #2ed573;
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .live-count span {
+            color: #fff;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .activity-item {
+            display: flex;
+            justify-content: space-between;
+            background: #1a1a1a;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+
+        .bought-tag {
+            color: #2ed573;
+        }
+
+        /* Virtual Cards List */
+        .virtual-card {
+            background: #151515;
+            border: 1px solid #282828;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .extra-card {
+            display: none;
+        }
+
+        .card-number {
+            font-size: 16px;
+            letter-spacing: 2px;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+
+        .card-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .card-info small {
+            color: #666;
+            font-size: 9px;
+        }
+
+        .card-info p {
+            font-size: 12px;
+            color: #ddd;
+        }
+
+        .card-pricing {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .price {
+            color: #d4af37;
+            font-weight: bold;
+        }
+
+        .price span {
+            color: #666;
+            font-weight: normal;
+            font-size: 11px;
+        }
+
+        .rating {
+            color: #ffcc00;
+            font-size: 11px;
+        }
+
+        .status.active {
+            color: #2ed573;
+            background: #0f2d18;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+        }
+
+        .buy-btn {
+            width: 100%;
+            background: #cc0000;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .buy-btn:hover {
+            background: #e60000;
+        }
+
+        /* Generic Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 15px;
+        }
+
+        .modal-content {
+            background: #181818;
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        /* Payment Methods Switcher */
+        .payment-methods {
+            display: flex;
+            justify-content: space-around;
+            margin: 15px 0;
+            gap: 5px;
+        }
+
+        .pay-tab {
+            padding: 8px 10px;
+            background: #222;
+            border: 1px solid #444;
+            border-radius: 8px;
+            font-size: 11px;
+            cursor: pointer;
+            color: #ccc;
+            flex: 1;
+            text-align: center;
+        }
+
+        .pay-tab.active {
+            background: #d4af37;
+            color: #000;
+            font-weight: bold;
+            border-color: #d4af37;
+        }
+
+        .payment-box {
+            background: #222;
+            border: 1px dashed #d4af37;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .payment-box span {
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .copy-btn {
+            background: #d4af37;
+            color: #000;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .input-group {
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .input-group label {
+            font-size: 12px;
+            color: #aaa;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background: #111;
+            color: #fff;
+            outline: none;
+        }
+
+        .confirm-btn {
+            width: 100%;
+            background: #cc0000;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        /* Profile & Referral Styles */
+        .referral-box {
+            background: #222;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .referral-code {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2ed573;
+            letter-spacing: 2px;
+            margin: 8px 0;
+        }
+
+        .referral-info {
+            font-size: 11px;
+            color: #aaa;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="navbar">
+        <div class="logo">
+            <span class="logo-icon">C</span> CeLox
+        </div>
+        <nav class="nav-links">
+            <a href="#" class="active"><i class="fa-solid fa-fire"></i> Home</a>
+            <a href="#cardsSection"><i class="fa-solid fa-credit-card"></i> Cards</a>
+            <a href="#"><i class="fa-solid fa-chart-simple"></i> Stats</a>
+        </nav>
+        <div class="profile-icon" onclick="openProfileModal()">
+            <i class="fa-solid fa-user"></i>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="lightning-icon">⚡</div>
+            <h1>Premium <span>Virtual Cards</span><br>For The Elite</h1>
+            <p>Instant issuance · Global acceptance · Bank-grade security</p>
+        </section>
+
+        <!-- Quick Select Grid -->
+        <section class="card-grid">
+            <div class="card-item">
+                <p class="card-title">Basic Micro</p>
+                <p class="card-price">₹199</p>
+            </div>
+            <div class="card-item">
+                <p class="card-title">Starter Mini</p>
+                <p class="card-price">₹299</p>
+            </div>
+            <div class="card-item">
+                <p class="card-title">Visa Signature</p>
+                <p class="card-price">₹899</p>
+            </div>
+            <div class="card-item">
+                <p class="card-title">Amex Black</p>
+                <p class="card-price">₹25,000</p>
+            </div>
+        </section>
+
+        <!-- View Card Plans Banner -->
+        <section class="plan-banner">
+            <div class="diamond-icon">💎</div>
+            <h2>View Card Plans</h2>
+            <p>Explore our premium virtual cards</p>
+            <div class="banner-actions">
+                <button class="btn-primary" onclick="showAllCards()">🔍 View All 30 Cards →</button>
+                <span class="badge" id="cardBadge">🔥 30 Cards Available</span>
+            </div>
+        </section>
+
+        <!-- Live Activity Section -->
+        <section class="live-section">
+            <div class="live-header">
+                <span>🔴 Live Now</span>
+                <span class="status-badge">● LIVE</span>
+            </div>
+            <h3 class="live-count">2.9K <span>people buying right now</span></h3>
+
+            <div class="activity-list">
+                <div class="activity-item">
+                    <span>🇮🇹 Giuseppe Romano</span>
+                    <span class="card-type">Starter Mini</span>
+                    <span class="bought-tag">✔ bought</span>
+                </div>
+                <div class="activity-item">
+                    <span>🇺🇸 David Ross</span>
+                    <span class="card-type">Visa Basic</span>
+                    <span class="bought-tag">✔ bought</span>
+                </div>
+                <div class="activity-item">
+                    <span>🇮🇳 Aadhya Nambiar</span>
+                    <span class="card-type">Amex Platinum</span>
+                    <span class="bought-tag">✔ bought</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cards List Section (Total 30 Cards) -->
+        <section class="cards-list" id="cardsSection">
+            
+            <!-- Default Visible Cards (1 to 5) -->
+            
+            <!-- Card 1 -->
+            <div class="virtual-card">
+                <div class="card-details">
+                    <p class="card-number">•••• •••• •••• 4892</p>
+                    <div class="card-info">
+                        <div><small>HOLDER</small><p>MICRO LITE</p></div>
+                        <div><small>VALID</small><p>05/28</p></div>
+                        <div><small>LIMIT</small><p>$50</p></div>
+                    </div>
+                </div>
+                <div class="card-pricing">
+                    <span class="price">₹199 <span>entry</span></span>
+                    <span class="rating">★★★★★ (4.9K)</span>
+                    <span class="status active">Active</span>
+                </div>
+                <button class="buy-btn" onclick="openPayment('₹199', 'Basic Micro - 4892')">Buy</button>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="virtual-card">
+                <div class="card-details">
+                    <p class="card-number">•••• •••• •••• 7315</p>
+                    <div class="card-info">
+                        <div><small>HOLDER</small><p>STARTER PRO</p></div>
+                        <div><small>VALID</small><p>08/28</p></div>
+                        <div><small>LIMIT</small><p>$100</p></div>
+                    </div>
+                </div>
+                <div class="card-pricing">
+                    <span class="price">₹299 <span>entry</span></span>
+                    <span class="rating">★★★★★ (3.8K)</span>
+                    <span class="status active">Active</span>
+                </div>
+                <button class="buy-btn" onclick="openPayment('₹299', 'Starter Mini - 7315')">Buy</button>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="virtual-card">
+                <div class="card-details">
+                    <p class="card-number">•••• •••• •••• 9041</p>
+                    <div class="card-info">
+                        <div><small>HOLDER</small><p>SILVER LITE</p></div>
+                        <div><small>VALID</small><p>11/28</p></div>
+                        <div><small>LIMIT</small><p>$150</p></div>
+                    </div>
+                </div>
+                <div class="card-pricing">
+                    <span class="price">₹399 <span>entry</span></span>
+                    <span class="rating">★★★★★ (2.1K)</span>
+                    <span class="status active">Active</span>
+                </div>
+                <button class="buy-btn" onclick="openPayment('₹399', 'Visa Silver - 9041')">Buy</button>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="virtual-card">
+                <div class="card-details">
+                    <p class="card-number">•••• •••• •••• 1683</p>
+                    <div class="card-info">
+                        <div><small>HOLDER</small><p>PLUS CARD</p></div>
+                        <div><small>VALID</small><p>01/29</p></div>
+                        <div><small>LIMIT</small><p>$200</p></div>
+                    </div>
+                </div>
+                <div class="card-pricing">
+                    <span class="price">₹499 <span>entry</span></span>
+                    <span class="rating">★★★★★ (1.5K)</span>
+                    <span class="status active">Active</span>
+                </div>
+                <button class="buy-btn" onclick="openPayment('₹499', 'Mastercard Plus - 1683')">Buy</button>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="virtual-card">
+                <div class="card-details">
+                    <p class="card-number">•••• •••• •••• 8254</p>
+                    <div class="card-info">
+                        <div><small>HOLDER</small><p>BLACK X</p></div>
+                        <div><small>VALID</small><p>09/28</p></div>
+                        <div><small>LIMIT</small><p>$273</p></div>
+                    </div>
+                </div>
+                <div class="card-pricing">
+                    <span class="price">₹650 <span>entry</span></span>
+                    <span class="rating">★★★★★ (2.4K)</span>
+                    <span class="status active">Active</span>
+                </div>
+                <button class="buy-btn" onclick="openPayment('₹650', 'Visa Platinum - 8254')">Buy</button>
+            </div>
+
+            <!-- Extra Hidden Cards (6 to 30) -->
+
+            <!-- Card 6 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 3107</p><div class="card-info"><div><small>HOLDER</small><p>FLEXI CARD</p></div><div><small>VALID</small><p>03/29</p></div><div><small>LIMIT</small><p>$350</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹750 <span>entry</span></span><span class="rating">★★★★★ (1.1K)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹750', 'Flexi Pay - 3107')">Buy</button>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 6520</p><div class="card-info"><div><small>HOLDER</small><p>BLACK X</p></div><div><small>VALID</small><p>12/29</p></div><div><small>LIMIT</small><p>$500</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹899 <span>entry</span></span><span class="rating">★★★★★ (3.1K)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹899', 'Visa Signature - 6520')">Buy</button>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 2498</p><div class="card-info"><div><small>HOLDER</small><p>GLOBAL X</p></div><div><small>VALID</small><p>04/29</p></div><div><small>LIMIT</small><p>$650</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹999 <span>entry</span></span><span class="rating">★★★★★ (2.8K)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹999', 'Global Pay - 2498')">Buy</button>
+            </div>
+
+            <!-- Card 9 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 5831</p><div class="card-info"><div><small>HOLDER</small><p>SMART VIRTUAL</p></div><div><small>VALID</small><p>06/29</p></div><div><small>LIMIT</small><p>$800</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹1,199 <span>entry</span></span><span class="rating">★★★★★ (950)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹1,199', 'Smart Virtual - 5831')">Buy</button>
+            </div>
+
+            <!-- Card 10 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 9164</p><div class="card-info"><div><small>HOLDER</small><p>BLACK X</p></div><div><small>VALID</small><p>03/30</p></div><div><small>LIMIT</small><p>$1,200</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹1,499 <span>entry</span></span><span class="rating">★★★★★ (892)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹1,499', 'Mastercard Gold - 9164')">Buy</button>
+            </div>
+
+            <!-- Card 11 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 4072</p><div class="card-info"><div><small>HOLDER</small><p>SHOPPER PRO</p></div><div><small>VALID</small><p>08/30</p></div><div><small>LIMIT</small><p>$1,500</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹1,799 <span>entry</span></span><span class="rating">★★★★★ (1.4K)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹1,799', 'Shopper Pro - 4072')">Buy</button>
+            </div>
+
+            <!-- Card 12 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 8719</p><div class="card-info"><div><small>HOLDER</small><p>STREAM VIP</p></div><div><small>VALID</small><p>10/30</p></div><div><small>LIMIT</small><p>$1,800</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹1,999 <span>entry</span></span><span class="rating">★★★★★ (3.2K)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹1,999', 'Stream VIP - 8719')">Buy</button>
+            </div>
+
+            <!-- Card 13 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 1356</p><div class="card-info"><div><small>HOLDER</small><p>BLACK X</p></div><div><small>VALID</small><p>06/31</p></div><div><small>LIMIT</small><p>$2,500</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹2,499 <span>entry</span></span><span class="rating">★★★★★ (1.8K)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹2,499', 'Amex Platinum - 1356')">Buy</button>
+            </div>
+
+            <!-- Card 14 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 6923</p><div class="card-info"><div><small>HOLDER</small><p>TRAVEL WORLD</p></div><div><small>VALID</small><p>12/30</p></div><div><small>LIMIT</small><p>$3,000</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹2,899 <span>entry</span></span><span class="rating">★★★★★ (1.1K)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹2,899', 'Travel World - 6923')">Buy</button>
+            </div>
+
+            <!-- Card 15 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 3480</p><div class="card-info"><div><small>HOLDER</small><p>VIP PRO</p></div><div><small>VALID</small><p>10/28</p></div><div><small>LIMIT</small><p>$3,500</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹3,200 <span>entry</span></span><span class="rating">★★★★★ (4.5K)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹3,200', 'Visa Infinite - 3480')">Buy</button>
+            </div>
+
+            <!-- Card 16 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 7512</p><div class="card-info"><div><small>HOLDER</small><p>BUSINESS ULTRA</p></div><div><small>VALID</small><p>02/31</p></div><div><small>LIMIT</small><p>$4,000</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹3,800 <span>entry</span></span><span class="rating">★★★★★ (850)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹3,800', 'Business Ultra - 7512')">Buy</button>
+            </div>
+
+            <!-- Card 17 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 2064</p><div class="card-info"><div><small>HOLDER</small><p>ELITE Z</p></div><div><small>VALID</small><p>01/32</p></div><div><small>LIMIT</small><p>$5,000</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹4,500 <span>entry</span></span><span class="rating">★★★★★ (5.0K)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹4,500', 'Mastercard Black - 2064')">Buy</button>
+            </div>
+
+            <!-- Card 18 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 9837</p><div class="card-info"><div><small>HOLDER</small><p>GAMER ELITE</p></div><div><small>VALID</small><p>04/31</p></div><div><small>LIMIT</small><p>$6,000</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹5,200 <span>entry</span></span><span class="rating">★★★★★ (2.3K)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹5,200', 'Gamer Elite - 9837')">Buy</button>
+            </div>
+
+            <!-- Card 19 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 5241</p><div class="card-info"><div><small>HOLDER</small><p>CRYPTO X</p></div><div><small>VALID</small><p>11/29</p></div><div><small>LIMIT</small><p>$7,500</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹6,000 <span>entry</span></span><span class="rating">★★★★★ (1.2K)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹6,000', 'Crypto Metal Card - 5241')">Buy</button>
+            </div>
+
+            <!-- Card 20 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 8195</p><div class="card-info"><div><small>HOLDER</small><p>TITANIUM MAX</p></div><div><small>VALID</small><p>07/31</p></div><div><small>LIMIT</small><p>$8,500</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹7,200 <span>entry</span></span><span class="rating">★★★★★ (990)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹7,200', 'Titanium Max - 8195')">Buy</button>
+            </div>
+
+            <!-- Card 21 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 3609</p><div class="card-info"><div><small>HOLDER</small><p>ULTRA VIP</p></div><div><small>VALID</small><p>09/31</p></div><div><small>LIMIT</small><p>$10,000</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹8,500 <span>entry</span></span><span class="rating">★★★★★ (1.7K)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹8,500', 'Ultra VIP - 3609')">Buy</button>
+            </div>
+
+            <!-- Card 22 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 7428</p><div class="card-info"><div><small>HOLDER</small><p>GLOBE PRIME</p></div><div><small>VALID</small><p>05/33</p></div><div><small>LIMIT</small><p>$15,000</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹9,999 <span>entry</span></span><span class="rating">★★★★★ (950)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹9,999', 'Globe VIP Platinum - 7428')">Buy</button>
+            </div>
+
+            <!-- Card 23 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 1953</p><div class="card-info"><div><small>HOLDER</small><p>LUXURY GOLD</p></div><div><small>VALID</small><p>11/32</p></div><div><small>LIMIT</small><p>$18,000</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹11,500 <span>entry</span></span><span class="rating">★★★★★ (620)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹11,500', 'Luxury Gold - 1953')">Buy</button>
+            </div>
+
+            <!-- Card 24 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 6284</p><div class="card-info"><div><small>HOLDER</small><p>DIAMOND CLUB</p></div><div><small>VALID</small><p>03/33</p></div><div><small>LIMIT</small><p>$20,000</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹13,000 <span>entry</span></span><span class="rating">★★★★★ (810)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹13,000', 'Diamond Club - 6284')">Buy</button>
+            </div>
+
+            <!-- Card 25 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 4710</p><div class="card-info"><div><small>HOLDER</small><p>APEX MASTER</p></div><div><small>VALID</small><p>08/33</p></div><div><small>LIMIT</small><p>$25,000</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹15,000 <span>entry</span></span><span class="rating">★★★★★ (430)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹15,000', 'Apex Master - 4710')">Buy</button>
+            </div>
+
+            <!-- Card 26 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 8392</p><div class="card-info"><div><small>HOLDER</small><p>ROYAL INFINITY</p></div><div><small>VALID</small><p>10/33</p></div><div><small>LIMIT</small><p>$30,000</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹17,500 <span>entry</span></span><span class="rating">★★★★★ (510)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹17,500', 'Royal Infinity - 8392')">Buy</button>
+            </div>
+
+            <!-- Card 27 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 2645</p><div class="card-info"><div><small>HOLDER</small><p>SUPREME ELITE</p></div><div><small>VALID</small><p>01/34</p></div><div><small>LIMIT</small><p>$35,000</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹20,000 <span>entry</span></span><span class="rating">★★★★★ (320)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹20,000', 'Supreme Elite - 2645')">Buy</button>
+            </div>
+
+            <!-- Card 28 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 5917</p><div class="card-info"><div><small>HOLDER</small><p>CELEXA PRIME</p></div><div><small>VALID</small><p>04/34</p></div><div><small>LIMIT</small><p>$40,000</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹22,500 <span>entry</span></span><span class="rating">★★★★★ (290)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹22,500', 'Celexa Prime - 5917')">Buy</button>
+            </div>
+
+            <!-- Card 29 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 9034</p><div class="card-info"><div><small>HOLDER</small><p>AMEX CENTURION</p></div><div><small>VALID</small><p>07/34</p></div><div><small>LIMIT</small><p>$50,000</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹25,000 <span>entry</span></span><span class="rating">★★★★★ (750)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹25,000', 'Amex Centurion - 9034')">Buy</button>
+            </div>
+
+            <!-- Card 30 -->
+            <div class="virtual-card extra-card">
+                <div class="card-details"><p class="card-number">•••• •••• •••• 3168</p><div class="card-info"><div><small>HOLDER</small><p>CELOX BILLIONAIRE</p></div><div><small>VALID</small><p>12/35</p></div><div><small>LIMIT</small><p>$100,000</p></div></div></div>
+                <div class="card-pricing"><span class="price">₹30,000 <span>entry</span></span><span class="rating">★★★★★ (190)</span><span class="status active">Active</span></div>
+                <button class="buy-btn" onclick="openPayment('₹30,000', 'Billionaire Club - 3168')">Buy</button>
+            </div>
+
+        </section>
+    </div>
+
+    <!-- Payment Popup Modal -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closePayment()">&times;</span>
+            <h3 style="text-align: center; color: #d4af37;">Select Payment Method</h3>
+            
+            <div class="payment-methods">
+                <div class="pay-tab active" onclick="selectPaymentMethod('bkash', '01302946081', 'e.g. 9N87XX65AY')">bKash</div>
+                <div class="pay-tab" onclick="selectPaymentMethod('nagad', '01302946081', 'e.g. 71A8XX99')">Nagad</div>
+                <div class="pay-tab" onclick="selectPaymentMethod('upi', 'celox@upi', 'e.g. UPI Ref No.')">UPI</div>
+                <div class="pay-tab" onclick="selectPaymentMethod('binance', '123456789 (Pay ID)', 'TxID / Hash')">Binance</div>
+            </div>
+
+            <p style="font-size: 12px; color: #ccc; text-align: center;" id="paymentInstructions">নিচের নম্বরে Send Money / Payment করুন।</p>
+            
+            <div class="payment-box">
+                <span id="payAddress">01302946081</span>
+                <button class="copy-btn" onclick="copyPaymentDetails()">Copy</button>
+            </div>
+
+            <p style="font-size: 13px; color: #ffcc00; text-align: center;" id="selectedCardText">Card: </p>
+            <p style="font-size: 12px; color: #2ed573; text-align: center;" id="amountText">Amount: ₹0</p>
+
+            <div class="input-group">
+                <label for="trxId" id="trxLabel">bKash Transaction ID (TrxID)</label>
+                <input type="text" id="trxId" placeholder="e.g. 9N87XX65AY">
+            </div>
+
+            <button class="confirm-btn" onclick="submitPayment()">Confirm Order</button>
+        </div>
+    </div>
+
+    <!-- Profile & Login/Signup Modal -->
+    <div class="modal-overlay" id="profileModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeProfileModal()">&times;</span>
+            
+            <!-- Auth Form -->
+            <div id="authSection">
+                <h3 style="text-align: center; color: #d4af37; margin-bottom: 15px;">Login / Sign Up</h3>
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="userName" placeholder="Enter your name">
+                </div>
+                <div class="input-group">
+                    <label>Email / Phone</label>
+                    <input type="text" id="userContact" placeholder="Enter email or phone">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="userPass" placeholder="Enter password">
+                </div>
+                <button class="confirm-btn" onclick="handleAuth()">Create Account / Login</button>
+            </div>
+
+            <!-- Profile Details -->
+            <div id="profileSection" style="display: none;">
+                <h3 style="text-align: center; color: #d4af37;">User Profile</h3>
+                <p style="text-align: center; color: #fff; margin-top: 10px;" id="displayName">Name: Guest</p>
+                
+                <div class="referral-box">
+                    <p style="font-size: 12px; color: #d4af37;">Your Exclusive Referral Code</p>
+                    <div class="referral-code" id="refCodeDisplay">CELOX-9982</div>
+                    <p class="referral-info">
+                        🎁 <strong>Referral Offer:</strong> আপনার রেফারেল কোড ব্যবহার করে ৫ জন বন্ধু কার্ড ক্রয় করলে আপনি পাবেন <strong>১টি ভার্চুয়াল কার্ড সম্পূর্ণ ফ্রি!</strong>
+                    </p>
+                </div>
+                <button class="confirm-btn" style="background: #444;" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle All 30 Cards
+        function showAllCards() {
+            const extraCards = document.querySelectorAll('.extra-card');
+            extraCards.forEach(card => card.style.display = 'block');
+            document.getElementById('cardBadge').innerText = "🔥 All 30 Cards Unlocked";
+            document.getElementById('cardsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Payment Modal & Method Selector
+        function openPayment(amount, cardName) {
+            document.getElementById('selectedCardText').innerText = "Card: " + cardName;
+            document.getElementById('amountText').innerText = "Total Amount: " + amount;
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+
+        function closePayment() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        function selectPaymentMethod(method, address, placeholder) {
+            const tabs = document.querySelectorAll('.pay-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.getElementById('payAddress').innerText = address;
+            document.getElementById('trxId').placeholder = placeholder;
+            document.getElementById('trxLabel').innerText = method.toUpperCase() + " Transaction ID / Proof";
+        }
+
+        function copyPaymentDetails() {
+            const text = document.getElementById('payAddress').innerText;
+            navigator.clipboard.writeText(text);
+            alert("কপি করা হয়েছে: " + text);
+        }
+
+        function submitPayment() {
+            const trxId = document.getElementById('trxId').value;
+            if(trxId.trim() === "") {
+                alert("দয়া করে Transaction ID প্রদান করুন!");
+            } else {
+                alert("আপনার অর্ডার সফলভাবে প্রসেস করা হচ্ছে। TrxID: " + trxId);
+                closePayment();
+            }
+        }
+
+        // Profile Modal Logic
+        function openProfileModal() {
+            document.getElementById('profileModal').style.display = 'flex';
+        }
+
+        function closeProfileModal() {
+            document.getElementById('profileModal').style.display = 'none';
+        }
+
+        function handleAuth() {
+            const name = document.getElementById('userName').value;
+            if(name.trim() === "") {
+                alert("দয়া করে আপনার নাম প্রদান করুন!");
+                return;
+            }
+            
+            const randomCode = "CELOX-" + Math.floor(1000 + Math.random() * 9000);
+            
+            document.getElementById('displayName').innerText = "Welcome, " + name;
+            document.getElementById('refCodeDisplay').innerText = randomCode;
+            
+            document.getElementById('authSection').style.display = 'none';
+            document.getElementById('profileSection').style.display = 'block';
+        }
+
+        function logout() {
+            document.getElementById('authSection').style.display = 'block';
+            document.getElementById('profileSection').style.display = 'none';
+        }
+    </script>
+</body>
+  </html>
